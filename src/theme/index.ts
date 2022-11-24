@@ -1,3 +1,6 @@
+import { Dimensions } from 'react-native';
+
+const { width, height } = Dimensions.get('screen');
 export const theme = {
   colors: {
     brand: '#92e3a9',
@@ -14,4 +17,6 @@ export const theme = {
       other: '#CAD3F5',
     },
   },
+  screenWidth: width,
+  screenHeight: height,
 };

@@ -3,7 +3,6 @@ import { ASSETS } from '../common/constant';
 import { theme } from '../theme';
 
 export function EmptyList() {
-  const { width, height } = Dimensions.get('screen');
   return (
     <View
       style={{
@@ -16,7 +15,7 @@ export function EmptyList() {
       <Image
         style={{
           resizeMode: 'contain',
-          width: width / 1.5,
+          width: theme.screenWidth / 1.5,
           height: 240,
         }}
         source={ASSETS.IMAGES.expenseEmpty}

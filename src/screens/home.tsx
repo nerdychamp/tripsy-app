@@ -1,106 +1,30 @@
 import { useNavigation } from '@react-navigation/native';
 import {
-  Dimensions,
+  FlatList,
   Image,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  FlatList,
-  ScrollView,
 } from 'react-native';
 import { ASSETS } from '../common/constant';
-import { getRandomThumbnail } from '../common/utils';
 import { Scaffold } from '../components/base';
 import { EmptyList } from '../components/empty-list';
-import { useAppDispatch } from '../redux/store';
+import { tripList } from '../data';
+import { useAppSelector } from '../redux/store';
 import { theme } from '../theme';
-import { ITrip } from '../types';
-
-const { width, height } = Dimensions.get('screen');
-
-const mockData: ITrip[] = [
-  // {
-  //   id: 1,
-  //   banner: getRandomThumbnail(),
-  //   place: 'Goa',
-  //   country: 'India',
-  // },
-  // {
-  //   id: 2,
-  //   banner: getRandomThumbnail(),
-  //   place: 'Maldive',
-  //   country: 'India',
-  // },
-  // {
-  //   id: 3,
-  //   banner: getRandomThumbnail(),
-  //   place: 'Diu',
-  //   country: 'India',
-  // },
-  // {
-  //   id: 4,
-  //   banner: getRandomThumbnail(),
-  //   place: 'Manali',
-  //   country: 'India',
-  // },
-  // {
-  //   id: 5,
-  //   banner: getRandomThumbnail(),
-  //   place: 'Ladak',
-  //   country: 'India',
-  // },
-  // {
-  //   id: 6,
-  //   banner: getRandomThumbnail(),
-  //   place: 'Kashmir',
-  //   country: 'India',
-  // },
-  // {
-  //   id: 7,
-  //   banner: getRandomThumbnail(),
-  //   place: 'Goa',
-  //   country: 'India',
-  // },
-  // {
-  //   id: 8,
-  //   banner: getRandomThumbnail(),
-  //   place: 'Maldive',
-  //   country: 'India',
-  // },
-  // {
-  //   id: 9,
-  //   banner: getRandomThumbnail(),
-  //   place: 'Diu',
-  //   country: 'India',
-  // },
-  // {
-  //   id: 10,
-  //   banner: getRandomThumbnail(),
-  //   place: 'Manali',
-  //   country: 'India',
-  // },
-  // {
-  //   id: 11,
-  //   banner: getRandomThumbnail(),
-  //   place: 'Ladak',
-  //   country: 'India',
-  // },
-  // {
-  //   id: 12,
-  //   banner: getRandomThumbnail(),
-  //   place: 'Kashmir',
-  //   country: 'India',
-  // },
-];
 
 export function HomeScreen() {
   const navigation = useNavigation();
-  const dispatch = useAppDispatch();
+  const trips = useAppSelector((state) => state.trips.trips);
 
   return (
-    <Scaffold>
-      <View style={styles.homeHeader}>
+    <Scaffold
+      style={{
+        paddingHorizontal: 0,
+      }}
+    >
+      <View style={[styles.homeHeader]}>
         <Text style={styles.heading}> Tripsy </Text>
       </View>
       <View style={styles.bannerContainer}>
@@ -111,21 +35,26 @@ export function HomeScreen() {
           flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
-          marginTop: 20,
-          marginBottom: 10,
+          marginTop: 16,
+          marginBottom: 12,
+          paddingHorizontal: 16,
         }}
       >
         <Text style={styles.subHeading}>RECENT TRIPS</Text>
         <TouchableOpacity onPress={() => navigation.navigate('Add Trip')}>
           <View style={styles.addTripButton}>
-            <Text style={styles.addTripButtonLabel}>Add Trip</Text>
+            <Text style={styles.addTripButtonLabel}>Add New Trip</Text>
           </View>
         </TouchableOpacity>
       </View>
       <FlatList
-        data={mockData}
+        data={trips}
         keyExtractor={(item) => item.id.toString()}
         numColumns={2}
+        style={{
+          alignSelf: 'center',
+          width: theme.screenWidth - 32,
+        }}
         columnWrapperStyle={styles.tripListItem}
         contentContainerStyle={{ paddingBottom: 12 }}
         showsHorizontalScrollIndicator={false}
@@ -154,6 +83,7 @@ export function HomeScreen() {
 const styles = StyleSheet.create({
   homeHeader: {
     paddingVertical: 6,
+    paddingHorizontal: 16,
   },
   heading: {
     fontSize: 28,
@@ -161,14 +91,14 @@ const styles = StyleSheet.create({
     color: theme.colors.text,
   },
   bannerContainer: {
-    marginTop: 24,
+    backgroundColor: theme.colors.brandLight,
+    marginTop: 16,
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'relative',
   },
   banner: {
-    width,
-    height: height / 4,
+    width: theme.screenWidth,
+    height: 240,
     resizeMode: 'cover',
   },
   addTripButton: {
@@ -183,12 +113,13 @@ const styles = StyleSheet.create({
     color: theme.colors.brandLight,
   },
   subHeading: {
-    color: theme.colors.text,
+    color: theme.colors.black,
     fontWeight: '700',
-    fontSize: 18,
+    fontSize: 17,
   },
   tripListItem: {
-    justifyContent: 'center',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
     marginTop: 10,
   },
   tripCard: {
