@@ -32,7 +32,7 @@ export function HomeScreen() {
             );
           }}
         >
-          <Text>add-expense</Text>
+          <Text>add trip</Text>
         </TouchableOpacity>
       </View>
     </Scaffold>
