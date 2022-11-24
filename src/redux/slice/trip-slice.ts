@@ -1,13 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-
-type IExpense = any;
-interface ITrip {
-  id: number;
-  place: string;
-  country: string;
-  expenses?: IExpense[];
-}
+import type { IExpense, ITrip } from '../../types';
 
 export interface ITripsState {
   trips: ITrip[];

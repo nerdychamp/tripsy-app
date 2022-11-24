@@ -10,7 +10,7 @@ export function Scaffold({ children, style, ...rest }: TScaffoldProps) {
   return (
     <SafeAreaView style={[styles.container, style && style]} {...rest}>
       <StatusBar backgroundColor={theme.colors.white} barStyle="dark-content" />
-      <StatusBar />
+      {/* <StatusBar /> */}
       {children}
     </SafeAreaView>
   );
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: theme.colors.bgLight,
     paddingHorizontal: 16,
-    paddingBottom: 32,
+    // paddingBottom: 32,
     paddingTop: 10,
   },
 });
