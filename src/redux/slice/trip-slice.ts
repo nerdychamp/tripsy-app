@@ -5,10 +5,12 @@ import { tripList } from '../../data';
 
 export interface ITripsState {
   trips: ITrip[];
+  deleteVisibleOn: number;
 }
 
 const initialTripsState: ITripsState = {
   trips: tripList,
+  deleteVisibleOn: null,
 };
 
 export const tripSlice = createSlice({
@@ -40,8 +42,31 @@ export const tripSlice = createSlice({
         return { payload };
       },
     },
+    removeExpense: {
+      reducer(
+        state,
+        action: PayloadAction<{ tripId: number; expenseId: number }>,
+      ) {
+        const trip = state.trips.find((t) => t.id === action.payload.tripId);
+        trip.expenses = trip.expenses.filter(
+          (e) => e.id !== action.payload.expenseId,
+        );
+      },
+      prepare(payload: { tripId: number; expenseId: number }) {
+        return { payload };
+      },
+    },
+    setDeleteVisible: {
+      reducer(state, action: PayloadAction<number>) {
+        state.deleteVisibleOn = action.payload;
+      },
+      prepare(payload: number) {
+        return { payload };
+      },
+    },
   },
 });
 
-export const { addTrip, addExpense } = tripSlice.actions;
+export const { addTrip, addExpense, setDeleteVisible, removeExpense } =
+  tripSlice.actions;
 export default tripSlice.reducer;

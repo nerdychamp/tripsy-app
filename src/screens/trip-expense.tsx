@@ -15,11 +15,13 @@ import { EmptyState } from '../components/empty-state';
 import { ExpenseCard } from '../components/expense-card';
 import { tripExpenseList } from '../data';
 import type { TTripExpenseRouteProp } from '../navigation/types';
-import { useAppSelector } from '../redux/store';
+import { removeExpense } from '../redux/slice/trip-slice';
+import { useAppDispatch, useAppSelector } from '../redux/store';
 import { theme } from '../theme';
 
 export function TripExpenseScreen() {
   const navigation = useNavigation();
+  const dispatch = useAppDispatch();
   const routeState = useRoute<TTripExpenseRouteProp>().params.item;
 
   const tripExpense = useAppSelector((state) => {
@@ -87,7 +89,19 @@ export function TripExpenseScreen() {
             comment="No expense? Go and spend some money! 💰💵"
           />
         }
-        renderItem={({ item, index }) => <ExpenseCard data={item} />}
+        renderItem={({ item, index }) => (
+          <ExpenseCard
+            data={item}
+            onDelete={(id) => {
+              dispatch(
+                removeExpense({
+                  tripId: routeState.id,
+                  expenseId: id,
+                }),
+              );
+            }}
+          />
+        )}
       />
     </Scaffold>
   );

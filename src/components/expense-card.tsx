@@ -1,53 +1,97 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Pressable } from 'react-native';
 import React from 'react';
 import { IExpense } from '../types';
 import { theme } from '../theme';
+import { useAppDispatch, useAppSelector } from '../redux/store';
+import { setDeleteVisible } from '../redux/slice/trip-slice';
 
 type TExpenseCardProp = {
   data: IExpense;
   index?: number;
+  onDelete?: (id: number) => void;
 };
 
-export function ExpenseCard({ data, index }: TExpenseCardProp) {
+export function ExpenseCard({ data, index, onDelete }: TExpenseCardProp) {
+  const dispatch = useAppDispatch();
+  const deleteVisibleOn = useAppSelector(
+    (state) => state.trips.deleteVisibleOn,
+  );
+
   return (
-    <View
-      key={data.id}
-      style={{
-        paddingVertical: 10,
-        paddingHorizontal: 15,
-        marginBottom: 20,
-        borderRadius: 6,
-        backgroundColor: theme.colors.categoryBg[data.category.toLowerCase()],
+    <Pressable
+      onPress={() => {
+        if (data.id === deleteVisibleOn) {
+          dispatch(setDeleteVisible(null));
+        } else {
+          dispatch(setDeleteVisible(data.id));
+        }
       }}
     >
       <View
+        key={data.id}
         style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
+          paddingVertical: 10,
+          paddingHorizontal: 15,
+          marginBottom: 20,
+          borderRadius: 6,
+          backgroundColor: theme.colors.categoryBg[data.category.toLowerCase()],
         }}
       >
-        <View>
-          <Text
-            style={{
-              fontWeight: '600',
-              fontSize: 18,
-              color: theme.colors.grey,
-            }}
-          >
-            {data.title}
-          </Text>
-          <Text style={{ fontSize: 14, color: theme.colors.text }}>
-            {data.category}
-          </Text>
-        </View>
-        <Text
-          style={{ fontSize: 22, fontWeight: '700', color: theme.colors.grey }}
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
         >
-          ₹{data.amount}
-        </Text>
+          <View>
+            <Text
+              style={{
+                fontWeight: '600',
+                fontSize: 18,
+                color: theme.colors.grey,
+              }}
+            >
+              {data.title}
+            </Text>
+            <Text style={{ fontSize: 14, color: theme.colors.text }}>
+              {data.category}
+            </Text>
+          </View>
+          {!(data.id === deleteVisibleOn) ? (
+            <Text
+              style={{
+                fontSize: 22,
+                fontWeight: '700',
+                color: theme.colors.grey,
+              }}
+            >
+              ₹{data.amount}
+            </Text>
+          ) : (
+            <Pressable
+              onPress={() => {
+                onDelete(data.id);
+              }}
+            >
+              <View
+                style={{
+                  paddingHorizontal: 12,
+                  paddingVertical: 4,
+                  borderRadius: 99999,
+                }}
+              >
+                <Text
+                  style={{ fontWeight: '600', color: theme.colors.orange1 }}
+                >
+                  Delete
+                </Text>
+              </View>
+            </Pressable>
+          )}
+        </View>
       </View>
-    </View>
+    </Pressable>
   );
 }
 
