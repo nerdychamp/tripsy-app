@@ -80,14 +80,17 @@ export function AddExpenseScreen() {
                 key={index}
                 style={{
                   ...styles.category,
-                  backgroundColor: category === cat ? 'green' : '#fff',
+                  backgroundColor:
+                    category === cat
+                      ? theme.colors.categoryBg[cat.toLowerCase()]
+                      : '#fff',
                 }}
                 onPress={() => setCategory(cat)}
               >
                 <Text
                   style={{
                     ...styles.categoryLabel,
-                    color: category === cat ? 'white' : 'black',
+                    color: 'black',
                   }}
                 >
                   {cat}
