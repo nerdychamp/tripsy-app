@@ -15,7 +15,7 @@ import { EmptyState } from '../components/empty-state';
 import { ExpenseCard } from '../components/expense-card';
 import { tripExpenseList } from '../data';
 import type { TTripExpenseRouteProp } from '../navigation/types';
-import { removeExpense } from '../redux/slice/trip-slice';
+import { removeExpense, removeTrip } from '../redux/slice/trip-slice';
 import { useAppDispatch, useAppSelector } from '../redux/store';
 import { theme } from '../theme';
 
@@ -31,7 +31,16 @@ export function TripExpenseScreen() {
 
   return (
     <Scaffold style={{ paddingHorizontal: 0 }}>
-      <AppBar onPress={() => navigation.goBack()} title={routeState.place} />
+      <AppBar
+        onPress={() => navigation.goBack()}
+        title={routeState.place}
+        showDeleteButton={true}
+        onDelete={() => {
+          console.log(routeState.id);
+          dispatch(removeTrip(routeState.id));
+          navigation.goBack();
+        }}
+      />
       <View style={styles.bannerContainer}>
         <Image style={styles.banner} source={routeState.banner} />
       </View>

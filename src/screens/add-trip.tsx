@@ -4,7 +4,7 @@ import { Image, StyleSheet, Text, TextInput, View } from 'react-native';
 import { getRandomThumbnail } from '../common/utils';
 import { AddButton, Scaffold } from '../components/base';
 import AppBar from '../components/base/app-bar';
-import { BackButton } from '../components/base/back-button';
+import { IconButton } from '../components/base/icon-button';
 import { addTrip } from '../redux/slice/trip-slice';
 import { useAppDispatch } from '../redux/store';
 import { theme } from '../theme';

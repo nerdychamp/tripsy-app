@@ -25,6 +25,14 @@ export const tripSlice = createSlice({
         return { payload };
       },
     },
+    removeTrip: {
+      reducer(state, action: PayloadAction<number>) {
+        state.trips = state.trips.filter((trip) => trip.id !== action.payload);
+      },
+      prepare(payload: number) {
+        return { payload };
+      },
+    },
     addExpense: {
       reducer(
         state,
@@ -67,6 +75,11 @@ export const tripSlice = createSlice({
   },
 });
 
-export const { addTrip, addExpense, setDeleteVisible, removeExpense } =
-  tripSlice.actions;
+export const {
+  addTrip,
+  addExpense,
+  setDeleteVisible,
+  removeExpense,
+  removeTrip,
+} = tripSlice.actions;
 export default tripSlice.reducer;
