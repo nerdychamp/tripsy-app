@@ -20,7 +20,7 @@ type TAddButtonProps = Omit<
 export function AddButton({ text, style, ...rest }: TAddButtonProps) {
   return (
     <TouchableOpacity {...rest}>
-      <View style={[style && style, styles.AddButton]}>
+      <View style={[styles.AddButton, style && style]}>
         <Text style={styles.buttonText}>{text || 'Add'}</Text>
       </View>
     </TouchableOpacity>

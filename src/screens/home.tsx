@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { ASSETS } from '../common/constant';
 import { Scaffold } from '../components/base';
+import AppBar from '../components/base/app-bar';
 import { EmptyState } from '../components/empty-state';
 import { tripList } from '../data';
 import { useAppSelector } from '../redux/store';
@@ -24,9 +25,11 @@ export function HomeScreen() {
         paddingHorizontal: 0,
       }}
     >
-      <View style={[styles.homeHeader]}>
-        <Text style={styles.heading}> Tripsy </Text>
-      </View>
+      <AppBar
+        title="Tripsy"
+        showBackButton={false}
+        titleStyle={{ fontSize: 26 }}
+      />
       <View style={styles.bannerContainer}>
         <Image style={styles.banner} source={ASSETS.IMAGES.tripsyBanner2} />
       </View>
@@ -48,7 +51,7 @@ export function HomeScreen() {
         </TouchableOpacity>
       </View>
       <FlatList
-        data={tripList}
+        data={trips}
         keyExtractor={(item) => item.id.toString()}
         numColumns={2}
         style={{
@@ -83,15 +86,6 @@ export function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  homeHeader: {
-    paddingVertical: 6,
-    paddingHorizontal: 16,
-  },
-  heading: {
-    fontSize: 28,
-    fontWeight: '600',
-    color: theme.colors.text,
-  },
   bannerContainer: {
     backgroundColor: theme.colors.brandLight,
     marginTop: 16,

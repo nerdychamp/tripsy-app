@@ -9,8 +9,6 @@ type TExpenseCardProp = {
 };
 
 export function ExpenseCard({ data, index }: TExpenseCardProp) {
-  // const [categoryColo] =
-  console.log(data.category);
   return (
     <View
       key={data.id}

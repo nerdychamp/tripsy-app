@@ -3,6 +3,7 @@ import React from 'react';
 import { Image, StyleSheet, Text, TextInput, View } from 'react-native';
 import { getRandomThumbnail } from '../common/utils';
 import { AddButton, Scaffold } from '../components/base';
+import AppBar from '../components/base/app-bar';
 import { BackButton } from '../components/base/back-button';
 import { addTrip } from '../redux/slice/trip-slice';
 import { useAppDispatch } from '../redux/store';
@@ -19,8 +20,8 @@ export function AddTripScreen() {
     if (place.length > 2 && country.length > 2) {
       const tripData = {
         id: Date.now(),
-        place: place,
-        country: country,
+        place: place.trim(),
+        country: country.trim(),
         banner,
         expenses: [],
       };
@@ -40,14 +41,11 @@ export function AddTripScreen() {
         }}
       >
         <View>
-          <View style={styles.header}>
-            <BackButton onPress={() => navigation.goBack()} />
-            <Text style={styles.heading}>Add Trip</Text>
-          </View>
+          <AppBar onPress={() => navigation.goBack()} title="Add Trip" />
           <View style={styles.bannerContainer}>
             <Image style={styles.banner} source={banner} />
           </View>
-          <View style={[styles.form, { paddingHorizontal: 16 }]}>
+          <View style={[{ paddingHorizontal: 16 }]}>
             <View style={styles.formElements}>
               <Text style={styles.inputLabel}>Where on Earth?</Text>
               <TextInput
@@ -75,18 +73,6 @@ export function AddTripScreen() {
 }
 
 const styles = StyleSheet.create({
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    height: 60,
-    paddingHorizontal: 16,
-  },
-  heading: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: theme.colors.black,
-    marginLeft: 20,
-  },
   bannerContainer: {
     // backgroundColor: theme.colors.brandLight,
     marginVertical: 10,
@@ -97,9 +83,6 @@ const styles = StyleSheet.create({
     width: theme.screenWidth,
     height: 200,
     resizeMode: 'cover',
-  },
-  form: {
-    // marginVertical: 10,
   },
   formElements: {
     marginTop: 16,
