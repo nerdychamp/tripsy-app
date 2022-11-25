@@ -5,6 +5,7 @@ export const ASSETS = {
     tripsyBanner2: require('../../../assets/images/banner.png'),
     tripsEmpty: require('../../../assets/images/trips-empty.png'),
     expenseEmpty: require('../../../assets/images/expense-empty.png'),
+    expenseEmpty1: require('../../../assets/images/expense-empty-1.png'),
     addExpense: require('../../../assets/images/add-expense.png'),
   },
   ICONS: {

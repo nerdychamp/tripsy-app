@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { ASSETS } from '../common/constant';
 import { Scaffold } from '../components/base';
-import { EmptyList } from '../components/empty-list';
+import { EmptyState } from '../components/empty-state';
 import { tripList } from '../data';
 import { useAppSelector } from '../redux/store';
 import { theme } from '../theme';
@@ -48,7 +48,7 @@ export function HomeScreen() {
         </TouchableOpacity>
       </View>
       <FlatList
-        data={trips}
+        data={tripList}
         keyExtractor={(item) => item.id.toString()}
         numColumns={2}
         style={{
@@ -58,7 +58,9 @@ export function HomeScreen() {
         columnWrapperStyle={styles.tripListItem}
         contentContainerStyle={{ paddingBottom: 12 }}
         showsHorizontalScrollIndicator={false}
-        ListEmptyComponent={EmptyList}
+        ListEmptyComponent={
+          <EmptyState comment="Looks like you haven't had any trips yet!" />
+        }
         renderItem={({ item, index }) => {
           return (
             <TouchableOpacity
@@ -118,7 +120,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
   },
   tripListItem: {
-    flexDirection: 'row',
+    // flexDirection: 'row',
     justifyContent: 'flex-start',
     marginTop: 10,
   },

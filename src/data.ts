@@ -1,5 +1,5 @@
 import { getRandomThumbnail } from './common/utils';
-import { ITrip } from './types';
+import { IExpense, ITrip } from './types';
 
 export const tripList: ITrip[] = [
   {
@@ -73,5 +73,68 @@ export const tripList: ITrip[] = [
     banner: getRandomThumbnail(),
     place: 'Kashmir',
     country: 'India',
+  },
+];
+
+export const expenseList: IExpense[] = [
+  {
+    id: 1,
+    title: 'Had a Vada-pav',
+    category: 'Food',
+    amount: 100,
+  },
+  {
+    id: 2,
+    title: 'Went by rixa',
+    category: 'Commute',
+    amount: 100,
+  },
+  {
+    id: 3,
+    title: 'Folk dance',
+    category: 'Entertainment',
+    amount: 100,
+  },
+  {
+    id: 4,
+    title: 'Local fashion shopping',
+    category: 'Shopping',
+    amount: 100,
+  },
+  {
+    id: 5,
+    title: 'Random expense',
+    category: 'Others',
+    amount: 100,
+  },
+  {
+    id: 6,
+    title: 'Had a Vada-pav',
+    category: 'Food',
+    amount: 100,
+  },
+  {
+    id: 7,
+    title: 'Went by rixa',
+    category: 'Commute',
+    amount: 100,
+  },
+  {
+    id: 8,
+    title: 'Folk dance',
+    category: 'Entertainment',
+    amount: 100,
+  },
+  {
+    id: 9,
+    title: 'Local fashion shopping',
+    category: 'Shopping',
+    amount: 100,
+  },
+  {
+    id: 10,
+    title: 'Random expense',
+    category: 'Others',
+    amount: 100,
   },
 ];

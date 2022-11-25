@@ -22,8 +22,20 @@ export function AppNavigator() {
         component={AddTripScreen}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="Add Expense" component={AddExpenseScreen} />
-      <Stack.Screen name="Trip Expense" component={TripExpenseScreen} />
+      <Stack.Screen
+        name="Add Expense"
+        component={AddExpenseScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Trip Expense"
+        component={TripExpenseScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
     </Stack.Navigator>
   );
 }

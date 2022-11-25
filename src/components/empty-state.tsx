@@ -1,8 +1,19 @@
-import { View, Image, Dimensions, Text } from 'react-native';
+import {
+  View,
+  Image,
+  Dimensions,
+  Text,
+  ImageSourcePropType,
+} from 'react-native';
 import { ASSETS } from '../common/constant';
 import { theme } from '../theme';
 
-export function EmptyList() {
+type TEmptyStateProps = {
+  comment: string;
+  source?: ImageSourcePropType;
+};
+
+export function EmptyState({ comment, source }: TEmptyStateProps) {
   return (
     <View
       style={{
@@ -18,7 +29,7 @@ export function EmptyList() {
           width: theme.screenWidth / 1.5,
           height: 240,
         }}
-        source={ASSETS.IMAGES.expenseEmpty}
+        source={source || ASSETS.IMAGES.expenseEmpty}
       />
       <Text
         style={{
@@ -26,7 +37,7 @@ export function EmptyList() {
           color: theme.colors.text,
         }}
       >
-        Looks like you haven't had any trips yet!
+        {comment}
       </Text>
     </View>
   );
