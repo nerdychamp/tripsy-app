@@ -50,37 +50,39 @@ export function HomeScreen() {
           </View>
         </TouchableOpacity>
       </View>
-      <FlatList
-        data={trips}
-        keyExtractor={(item) => item.id.toString()}
-        numColumns={2}
-        style={{
-          alignSelf: 'center',
-          width: theme.screenWidth - 32,
-        }}
-        columnWrapperStyle={styles.tripListItem}
-        contentContainerStyle={{ paddingBottom: 12 }}
-        showsHorizontalScrollIndicator={false}
-        ListEmptyComponent={
-          <EmptyState comment="Looks like you haven't had any trips yet!" />
-        }
-        renderItem={({ item, index }) => {
-          return (
-            <TouchableOpacity
-              key={index}
-              onPress={() => navigation.navigate('Trip Expense', { item })}
-            >
-              <View style={styles.tripCard}>
-                <Image source={item.banner} style={styles.tripBanner} />
-                <View style={{ marginLeft: 10, marginTop: 5 }}>
-                  <Text style={styles.tripPlace}>{item.place}</Text>
-                  <Text style={styles.tripCountry}>{item.country}</Text>
+      <View style={{ height: 400, overflow: 'hidden' }}>
+        <FlatList
+          data={tripList}
+          keyExtractor={(item) => item.id.toString()}
+          numColumns={2}
+          style={{
+            alignSelf: 'center',
+            width: theme.screenWidth - 32,
+          }}
+          columnWrapperStyle={styles.tripListItem}
+          contentContainerStyle={{ paddingBottom: 12 }}
+          showsVerticalScrollIndicator={false}
+          ListEmptyComponent={
+            <EmptyState comment="Looks like you haven't had any trips yet!" />
+          }
+          renderItem={({ item, index }) => {
+            return (
+              <TouchableOpacity
+                key={index}
+                onPress={() => navigation.navigate('Trip Expense', { item })}
+              >
+                <View style={styles.tripCard}>
+                  <Image source={item.banner} style={styles.tripBanner} />
+                  <View style={{ marginLeft: 10, marginTop: 5 }}>
+                    <Text style={styles.tripPlace}>{item.place}</Text>
+                    <Text style={styles.tripCountry}>{item.country}</Text>
+                  </View>
                 </View>
-              </View>
-            </TouchableOpacity>
-          );
-        }}
-      />
+              </TouchableOpacity>
+            );
+          }}
+        />
+      </View>
     </Scaffold>
   );
 }
