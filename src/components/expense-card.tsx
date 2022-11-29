@@ -4,6 +4,7 @@ import { IExpense } from '../types';
 import { theme } from '../theme';
 import { useAppDispatch, useAppSelector } from '../redux/store';
 import { setDeleteVisible } from '../redux/slice/trip-slice';
+import { MotiText, MotiView } from 'moti';
 
 type TExpenseCardProp = {
   data: IExpense;
@@ -16,6 +17,8 @@ export function ExpenseCard({ data, index, onDelete }: TExpenseCardProp) {
   const deleteVisibleOn = useAppSelector(
     (state) => state.trips.deleteVisibleOn,
   );
+
+  const [leave, setLeave] = React.useState(false);
 
   return (
     <Pressable
@@ -69,25 +72,40 @@ export function ExpenseCard({ data, index, onDelete }: TExpenseCardProp) {
               ₹{data.amount}
             </Text>
           ) : (
-            <Pressable
-              onPress={() => {
-                onDelete(data.id);
+            <MotiView
+              from={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{
+                // default settings for all style values
+                type: 'timing',
+                duration: 350,
+                scale: {
+                  type: 'spring',
+                  delay: 100,
+                },
               }}
             >
-              <View
-                style={{
-                  paddingHorizontal: 12,
-                  paddingVertical: 4,
-                  borderRadius: 99999,
+              <Pressable
+                onPress={() => {
+                  onDelete(data.id);
                 }}
               >
-                <Text
-                  style={{ fontWeight: '600', color: theme.colors.orange1 }}
+                <View
+                  style={{
+                    paddingHorizontal: 8,
+                    paddingVertical: 4,
+                    borderRadius: 99999,
+                    paddingRight: -12,
+                  }}
                 >
-                  Delete
-                </Text>
-              </View>
-            </Pressable>
+                  <Text
+                    style={{ fontWeight: '600', color: theme.colors.orange1 }}
+                  >
+                    Delete
+                  </Text>
+                </View>
+              </Pressable>
+            </MotiView>
           )}
         </View>
       </View>

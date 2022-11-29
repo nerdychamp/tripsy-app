@@ -46,7 +46,7 @@ export function TripExpenseScreen() {
       </View>
       <View
         style={{
-          marginVertical: 16,
+          marginBottom: 16,
           paddingHorizontal: 20,
           flexDirection: 'row',
           justifyContent: 'space-between',
@@ -118,14 +118,12 @@ export function TripExpenseScreen() {
 
 const styles = StyleSheet.create({
   bannerContainer: {
-    marginVertical: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'relative',
   },
   banner: {
     width: theme.screenWidth,
-    height: 220,
-    resizeMode: 'cover',
+    height: 260,
+    resizeMode: 'contain',
   },
 });

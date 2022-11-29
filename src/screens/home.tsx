@@ -52,7 +52,7 @@ export function HomeScreen() {
       </View>
       <View style={{ height: 400, overflow: 'hidden' }}>
         <FlatList
-          data={tripList}
+          data={trips}
           keyExtractor={(item) => item.id.toString()}
           numColumns={2}
           style={{
