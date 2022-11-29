@@ -33,7 +33,7 @@ export function HomeScreen() {
       </View>
       <View className="h-[410px] overflow-hidden">
         <FlatList
-          className="self-center"
+          className="self-center w-screen ml-7"
           data={trips}
           keyExtractor={(item) => item.id.toString()}
           numColumns={2}
