@@ -62,6 +62,7 @@ export function HomeScreen() {
           numColumns={2}
           style={{
             alignSelf: 'center',
+            backgroundColor: 'red',
             width: theme.screenWidth - 32,
           }}
           columnWrapperStyle={styles.tripListItem}
@@ -121,8 +122,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   tripCard: {
+    marginHorizontal: 5,
     backgroundColor: 'white',
-    marginHorizontal: 6,
     padding: 8,
     borderRadius: 18,
   },
