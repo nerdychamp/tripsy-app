@@ -43,7 +43,12 @@ export function HomeScreen() {
           paddingHorizontal: 16,
         }}
       >
-        <Text style={styles.subHeading}>RECENT TRIPS</Text>
+        <Text
+          style={{ color: theme.colors.black, fontWeight: '700', fontSize: 17 }}
+          className="font-[700] text-lg text-[theme.colors.black]"
+        >
+          RECENT TRIPS
+        </Text>
         <TouchableOpacity onPress={() => navigation.navigate('Add Trip')}>
           <View style={styles.addTripButton}>
             <Text style={styles.addTripButtonLabel}>Add New Trip</Text>
@@ -109,11 +114,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '700',
     color: theme.colors.brandLight,
-  },
-  subHeading: {
-    color: theme.colors.black,
-    fontWeight: '700',
-    fontSize: 17,
   },
   tripListItem: {
     // flexDirection: 'row',
