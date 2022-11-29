@@ -1,28 +1,27 @@
-import {
-  StyleProp,
-  StyleSheet,
-  Text,
-  TextStyle,
-  View,
-  ViewStyle,
-} from 'react-native';
+import { StyleProp, Text, TextStyle, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import React from 'react';
 import { IconButton } from './icon-button';
-import { theme } from '../../theme';
+import { ViewProps } from 'react-native';
+import { styled } from 'nativewind';
 
-type TAppBarProps = {
+type TAppBarProps = ViewProps & {
   title: string;
   showDeleteButton?: boolean;
+  showBackButton?: boolean;
   onPress?: () => void;
   onDelete?: () => void;
-  showBackButton?: boolean;
-  style?: StyleProp<ViewStyle>;
   titleStyle?: StyleProp<TextStyle>;
 };
 
-export default function AppBar({
+export const AppBar = styled(Bar, {
+  props: {
+    titleStyle: true,
+  },
+});
+
+function Bar({
   title,
   onPress,
   style,
@@ -33,20 +32,12 @@ export default function AppBar({
 }: TAppBarProps) {
   return (
     <View
-      style={[
-        {
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          height: 60,
-          paddingHorizontal: 16,
-        },
-        style && style,
-      ]}
+      style={style}
+      className="flex-row items-center justify-between h-[60] px-3"
     >
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+      <View className="flex-row items-center justify-center">
         {showBackButton && (
-          <IconButton onPress={onPress} style={{}}>
+          <IconButton onPress={onPress}>
             <Ionicons
               name="chevron-back-outline"
               size={28}
@@ -55,15 +46,8 @@ export default function AppBar({
           </IconButton>
         )}
         <Text
-          style={[
-            {
-              fontSize: 22,
-              fontWeight: '700',
-              color: theme.colors.grey,
-              marginLeft: 20,
-            },
-            titleStyle && titleStyle,
-          ]}
+          style={titleStyle}
+          className="text-[22px] font-bold text-black ml-3"
         >
           {title}
         </Text>
@@ -72,7 +56,7 @@ export default function AppBar({
         <IconButton onPress={onDelete}>
           <Ionicons
             name="trash-bin-outline"
-            size={28}
+            size={22}
             color="theme.colors.grey"
           />
         </IconButton>

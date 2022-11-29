@@ -1,23 +1,15 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  FlatList,
-} from 'react-native';
+import { Text, View, Image, TouchableOpacity, FlatList } from 'react-native';
 import { ASSETS } from '../common/constant';
 import { Scaffold } from '../components/base';
-import AppBar from '../components/base/app-bar';
+import { AppBar } from '../components/base/app-bar';
 import { EmptyState } from '../components/empty-state';
 import { ExpenseCard } from '../components/expense-card';
 import { tripExpenseList } from '../data';
 import type { TTripExpenseRouteProp } from '../navigation/types';
 import { removeExpense, removeTrip } from '../redux/slice/trip-slice';
 import { useAppDispatch, useAppSelector } from '../redux/store';
-import { theme } from '../theme';
 
 export function TripExpenseScreen() {
   const navigation = useNavigation();
@@ -30,7 +22,7 @@ export function TripExpenseScreen() {
   });
 
   return (
-    <Scaffold style={{ paddingHorizontal: 0 }}>
+    <Scaffold className="px-0">
       <AppBar
         onPress={() => navigation.goBack()}
         title={routeState.place}
@@ -41,49 +33,22 @@ export function TripExpenseScreen() {
           navigation.goBack();
         }}
       />
-      <View style={styles.bannerContainer}>
-        <Image style={styles.banner} source={routeState.banner} />
+      <View className="justify-center items-center">
+        <Image
+          source={routeState.banner}
+          resizeMode="contain"
+          className="w-screen h-[260px]"
+        />
       </View>
-      <View
-        style={{
-          marginBottom: 16,
-          paddingHorizontal: 20,
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-      >
-        <Text
-          style={{
-            color: theme.colors.black,
-            fontWeight: '700',
-            fontSize: 18,
-          }}
-        >
-          Expense
-        </Text>
+      <View className="mb-4 px-5 flex-row justify-between items-center">
+        <Text className="text-lg font-bold text-black">Expense</Text>
         <TouchableOpacity
           onPress={() =>
             navigation.navigate('Add Expense', { item: routeState })
           }
         >
-          <View
-            style={{
-              backgroundColor: theme.colors.orange2,
-              paddingVertical: 10,
-              paddingHorizontal: 24,
-              borderRadius: 9999,
-            }}
-          >
-            <Text
-              style={{
-                color: theme.colors.white,
-                fontWeight: '700',
-                fontSize: 14,
-              }}
-            >
-              Add Expenses
-            </Text>
+          <View className={`py-[10] px-6 rounded-full bg-orange2`}>
+            <Text className="text-sm font-bold text-white">Add Expenses</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -115,15 +80,3 @@ export function TripExpenseScreen() {
     </Scaffold>
   );
 }
-
-const styles = StyleSheet.create({
-  bannerContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  banner: {
-    width: theme.screenWidth,
-    height: 260,
-    resizeMode: 'contain',
-  },
-});
