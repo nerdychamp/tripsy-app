@@ -1,11 +1,6 @@
+import { styled } from 'nativewind';
 import React from 'react';
-import {
-  StyleProp,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  ViewStyle,
-} from 'react-native';
+import { StyleProp, TouchableOpacity, View, ViewStyle } from 'react-native';
 
 type IconButtonProps = Omit<
   React.ComponentProps<typeof TouchableOpacity>,
@@ -15,20 +10,18 @@ type IconButtonProps = Omit<
   style?: StyleProp<ViewStyle>;
 };
 
-export function IconButton({ children, style, ...rest }: IconButtonProps) {
+export const IconButton = styled(Button, {
+  props: {
+    style: true,
+  },
+});
+
+function Button({ children, style, ...rest }: IconButtonProps) {
   return (
     <TouchableOpacity {...rest}>
       <View
-        style={[
-          {
-            height: 40,
-            width: 40,
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderRadius: 99999,
-          },
-          style && style,
-        ]}
+        style={style}
+        className="h-10 w-10 justify-center items-center rounded-full"
       >
         {/* <Image style={styles.backIcon} source={ASSETS.ICONS.back} /> */}
         {children}
@@ -36,10 +29,3 @@ export function IconButton({ children, style, ...rest }: IconButtonProps) {
     </TouchableOpacity>
   );
 }
-
-const styles = StyleSheet.create({
-  backIcon: {
-    height: 35,
-    width: 35,
-  },
-});

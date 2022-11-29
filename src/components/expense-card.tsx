@@ -1,10 +1,10 @@
-import { StyleSheet, Text, View, Pressable } from 'react-native';
+import { MotiView } from 'moti';
 import React from 'react';
-import { IExpense } from '../types';
-import { theme } from '../theme';
-import { useAppDispatch, useAppSelector } from '../redux/store';
+import { Pressable, Text, View } from 'react-native';
 import { setDeleteVisible } from '../redux/slice/trip-slice';
-import { MotiText, MotiView } from 'moti';
+import { useAppDispatch, useAppSelector } from '../redux/store';
+import { theme } from '../theme';
+import { IExpense } from '../types';
 
 type TExpenseCardProp = {
   data: IExpense;
@@ -33,42 +33,19 @@ export function ExpenseCard({ data, index, onDelete }: TExpenseCardProp) {
       <View
         key={data.id}
         style={{
-          paddingVertical: 10,
-          paddingHorizontal: 15,
-          marginBottom: 20,
-          borderRadius: 6,
           backgroundColor: theme.colors.categoryBg[data.category.toLowerCase()],
         }}
+        className="py-[10] px-4 mb-5 rounded-md"
       >
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}
-        >
+        <View className="flex-row justify-between items-center">
           <View>
-            <Text
-              style={{
-                fontWeight: '600',
-                fontSize: 18,
-                color: theme.colors.grey,
-              }}
-            >
+            <Text className="text-lg font-semibold text-grey">
               {data.title}
             </Text>
-            <Text style={{ fontSize: 14, color: theme.colors.text }}>
-              {data.category}
-            </Text>
+            <Text className="text-sm text-text">{data.category}</Text>
           </View>
           {!(data.id === deleteVisibleOn) ? (
-            <Text
-              style={{
-                fontSize: 22,
-                fontWeight: '700',
-                color: theme.colors.grey,
-              }}
-            >
+            <Text className="text-[22px] font-semibold text-grey">
               ₹{data.amount}
             </Text>
           ) : (
@@ -90,19 +67,8 @@ export function ExpenseCard({ data, index, onDelete }: TExpenseCardProp) {
                   onDelete(data.id);
                 }}
               >
-                <View
-                  style={{
-                    paddingHorizontal: 8,
-                    paddingVertical: 4,
-                    borderRadius: 99999,
-                    paddingRight: -12,
-                  }}
-                >
-                  <Text
-                    style={{ fontWeight: '600', color: theme.colors.orange1 }}
-                  >
-                    Delete
-                  </Text>
+                <View className="px-2 py-1 rounded-full -mr-2">
+                  <Text className="text-orange1 font-semibold">Delete</Text>
                 </View>
               </Pressable>
             </MotiView>
@@ -112,5 +78,3 @@ export function ExpenseCard({ data, index, onDelete }: TExpenseCardProp) {
     </Pressable>
   );
 }
-
-const styles = StyleSheet.create({});
