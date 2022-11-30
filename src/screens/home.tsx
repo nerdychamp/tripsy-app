@@ -5,11 +5,11 @@ import { Scaffold } from '../components/base';
 import { AppBar } from '../components/base/app-bar';
 import { EmptyState } from '../components/empty-state';
 import { tripList } from '../data';
-import { useAppSelector } from '../redux/store';
+import { useTrips } from '../zustand';
 
 export function HomeScreen() {
   const navigation = useNavigation();
-  const trips = useAppSelector((state) => state.trips.trips);
+  const zTrips = useTrips();
 
   return (
     <Scaffold className="px-0">
@@ -34,7 +34,7 @@ export function HomeScreen() {
       <View className="h-[410px] overflow-hidden">
         <FlatList
           className="self-center w-screen ml-7"
-          data={trips}
+          data={zTrips}
           keyExtractor={(item) => item.id.toString()}
           numColumns={2}
           columnWrapperStyle={{ justifyContent: 'flex-start', marginTop: 10 }}

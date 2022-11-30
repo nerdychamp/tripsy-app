@@ -12,10 +12,9 @@ import { ASSETS } from '../common/constant';
 import { AddButton, Scaffold } from '../components/base';
 import { AppBar } from '../components/base/app-bar';
 import type { TAddExpenseRouteProp } from '../navigation/types';
-import { addExpense } from '../redux/slice/trip-slice';
-import { useAppDispatch } from '../redux/store';
 import { theme } from '../theme';
 import { IExpense } from '../types';
+import { useTripActions } from '../zustand';
 
 const CATEGORIES: string[] = [
   'Food',
@@ -26,7 +25,7 @@ const CATEGORIES: string[] = [
 ];
 
 export function AddExpenseScreen() {
-  const dispatch = useAppDispatch();
+  const { addExpense } = useTripActions();
   const navigation = useNavigation();
   const routeState = useRoute<TAddExpenseRouteProp>().params.item;
 
@@ -41,7 +40,7 @@ export function AddExpenseScreen() {
       amount: Number(amount.trim()),
       category: category as IExpense['category'],
     };
-    dispatch(addExpense({ tripId: routeState.id, expense }));
+    addExpense(routeState.id, expense);
     navigation.navigate('Trip Expense', { item: routeState });
   };
 
@@ -103,5 +102,3 @@ export function AddExpenseScreen() {
     </Scaffold>
   );
 }
-
-const styles = StyleSheet.create({});

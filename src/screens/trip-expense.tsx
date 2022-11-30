@@ -8,18 +8,14 @@ import { EmptyState } from '../components/empty-state';
 import { ExpenseCard } from '../components/expense-card';
 import { tripExpenseList } from '../data';
 import type { TTripExpenseRouteProp } from '../navigation/types';
-import { removeExpense, removeTrip } from '../redux/slice/trip-slice';
-import { useAppDispatch, useAppSelector } from '../redux/store';
+import { useGetExpense, useTripActions } from '../zustand';
 
 export function TripExpenseScreen() {
+  const { removeTrip, removeExpense } = useTripActions();
   const navigation = useNavigation();
-  const dispatch = useAppDispatch();
   const routeState = useRoute<TTripExpenseRouteProp>().params.item;
 
-  const tripExpense = useAppSelector((state) => {
-    const theTrip = state.trips.trips.find((t) => t.id === routeState.id);
-    return theTrip.expenses;
-  });
+  const tripExpense = useGetExpense(routeState.id);
 
   return (
     <Scaffold className="px-0">
@@ -28,8 +24,7 @@ export function TripExpenseScreen() {
         title={routeState.place}
         showDeleteButton={true}
         onDelete={() => {
-          console.log(routeState.id);
-          dispatch(removeTrip(routeState.id));
+          removeTrip(routeState.id);
           navigation.goBack();
         }}
       />
@@ -67,12 +62,7 @@ export function TripExpenseScreen() {
           <ExpenseCard
             data={item}
             onDelete={(id) => {
-              dispatch(
-                removeExpense({
-                  tripId: routeState.id,
-                  expenseId: id,
-                }),
-              );
+              removeExpense(routeState.id, id);
             }}
           />
         )}
