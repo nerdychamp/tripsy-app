@@ -4,8 +4,7 @@ import { Image, Text, TextInput, View } from 'react-native';
 import { getRandomThumbnail } from '../common/utils';
 import { AddButton, Scaffold } from '../components/base';
 import { AppBar } from '../components/base/app-bar';
-import { addTrip } from '../redux/slice/trip-slice';
-import { useAppDispatch } from '../redux/store';
+import { useTripActions } from '../zustand';
 
 const styles = {
   formElements: 'mt-4',
@@ -14,8 +13,8 @@ const styles = {
 };
 
 export function AddTripScreen() {
+  const { addTrip } = useTripActions();
   const navigation = useNavigation();
-  const dispatch = useAppDispatch();
   const [banner] = React.useState(() => getRandomThumbnail());
   const [place, setPlace] = React.useState('');
   const [country, setCountry] = React.useState('');
@@ -29,7 +28,7 @@ export function AddTripScreen() {
         banner,
         expenses: [],
       };
-      dispatch(addTrip(tripData));
+      addTrip(tripData);
       navigation.navigate('Home');
     }
   };
