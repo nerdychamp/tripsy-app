@@ -4,7 +4,7 @@ import { Image, Text, TextInput, View } from 'react-native';
 import { getRandomThumbnail } from '../common/utils';
 import { AddButton, Scaffold } from '../components/base';
 import { AppBar } from '../components/base/app-bar';
-import { useTripActions } from '../zustand';
+import { useTripActions } from '../zustand/trip-store';
 
 const styles = {
   formElements: 'mt-4',

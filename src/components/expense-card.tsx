@@ -1,10 +1,12 @@
 import { MotiView } from 'moti';
 import React from 'react';
 import { Pressable, Text, View } from 'react-native';
-import { setDeleteVisible } from '../redux/slice/trip-slice';
-import { useAppDispatch, useAppSelector } from '../redux/store';
 import { theme } from '../theme';
 import { IExpense } from '../types';
+import {
+  useDeleteVisibleActions,
+  useDeleteVisibleOn,
+} from '../zustand/delete-visible-store';
 
 type TExpenseCardProp = {
   data: IExpense;
@@ -13,20 +15,16 @@ type TExpenseCardProp = {
 };
 
 export function ExpenseCard({ data, index, onDelete }: TExpenseCardProp) {
-  const dispatch = useAppDispatch();
-  const deleteVisibleOn = useAppSelector(
-    (state) => state.trips.deleteVisibleOn,
-  );
-
-  const [leave, setLeave] = React.useState(false);
+  const deleteVisibleOn = useDeleteVisibleOn();
+  const { setDeleteVisibility } = useDeleteVisibleActions();
 
   return (
     <Pressable
       onPress={() => {
         if (data.id === deleteVisibleOn) {
-          dispatch(setDeleteVisible(null));
+          setDeleteVisibility(null);
         } else {
-          dispatch(setDeleteVisible(data.id));
+          setDeleteVisibility(data.id);
         }
       }}
     >
