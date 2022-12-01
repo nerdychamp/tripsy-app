@@ -1,6 +1,13 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import React from 'react';
-import { Text, View, Image, TouchableOpacity, FlatList } from 'react-native';
+import {
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  FlatList,
+  Alert,
+} from 'react-native';
 import { ASSETS } from '../common/constant';
 import { Scaffold } from '../components/base';
 import { AppBar } from '../components/base/app-bar';
@@ -8,10 +15,12 @@ import { EmptyState } from '../components/empty-state';
 import { ExpenseCard } from '../components/expense-card';
 import { tripExpenseList } from '../data';
 import type { TTripExpenseRouteProp } from '../navigation/types';
-import { useGetExpense, useTripActions } from '../zustand';
+import { useDeleteVisibleActions } from '../zustand/delete-visible-store';
+import { useGetExpense, useTripActions } from '../zustand/trip-store';
 
 export function TripExpenseScreen() {
   const { removeTrip, removeExpense } = useTripActions();
+  const { setDeleteVisibility } = useDeleteVisibleActions();
   const navigation = useNavigation();
   const routeState = useRoute<TTripExpenseRouteProp>().params.item;
 
@@ -62,7 +71,25 @@ export function TripExpenseScreen() {
           <ExpenseCard
             data={item}
             onDelete={(id) => {
-              removeExpense(routeState.id, id);
+              Alert.alert(
+                'Confirm',
+                'Sure, you want to delete',
+                [
+                  {
+                    text: 'Cancel',
+                    onPress: () => setDeleteVisibility(null),
+                    style: 'cancel',
+                  },
+                  {
+                    text: 'OK',
+                    onPress: () => removeExpense(routeState.id, id),
+                  },
+                ],
+                {
+                  cancelable: true,
+                  onDismiss: () => setDeleteVisibility(null),
+                },
+              );
             }}
           />
         )}

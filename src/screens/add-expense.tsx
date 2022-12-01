@@ -14,7 +14,7 @@ import { AppBar } from '../components/base/app-bar';
 import type { TAddExpenseRouteProp } from '../navigation/types';
 import { theme } from '../theme';
 import { IExpense } from '../types';
-import { useTripActions } from '../zustand';
+import { useTripActions } from '../zustand/trip-store';
 
 const CATEGORIES: string[] = [
   'Food',

@@ -30,7 +30,6 @@ const useTripStore = create<TripState>((set, get) => ({
       set((state) => ({
         trips: state.trips.map((trip, index) => {
           if (trip.id === tripId) {
-            console.log(index);
             trip = {
               ...trip,
               expenses: [payload, ...trip.expenses],

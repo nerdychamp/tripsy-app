@@ -5,7 +5,7 @@ import { Scaffold } from '../components/base';
 import { AppBar } from '../components/base/app-bar';
 import { EmptyState } from '../components/empty-state';
 import { tripList } from '../data';
-import { useTrips } from '../zustand';
+import { useTrips } from '../zustand/trip-store';
 
 export function HomeScreen() {
   const navigation = useNavigation();
