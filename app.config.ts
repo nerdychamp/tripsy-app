@@ -4,7 +4,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
   name: 'Tripsy',
   slug: 'tripsy',
-  description: 'Tripsy - Expense made easier than whatsapp',
+  description: 'Tripsy - Expense made easier',
   splash: {
     backgroundColor: '#7f5af0',
     image: './assets/splash.png',
