@@ -5,6 +5,7 @@ import React from 'react';
 import { IconButton } from './icon-button';
 import { ViewProps } from 'react-native';
 import { styled } from 'nativewind';
+import { theme } from '../../theme';
 
 type TAppBarProps = ViewProps & {
   title: string;
@@ -57,7 +58,7 @@ function Bar({
           <Ionicons
             name="trash-bin-outline"
             size={22}
-            color="theme.colors.grey"
+            color={theme.colors.grey}
           />
         </IconButton>
       )}
