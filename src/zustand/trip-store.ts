@@ -1,4 +1,4 @@
-import create from 'zustand';
+import { create } from 'zustand';
 import { tripList } from '../data';
 import { IExpense, ITrip } from '../types';
 
