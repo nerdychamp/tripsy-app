@@ -1,5 +1,7 @@
 import { Text } from 'react-native';
 
 export default function Index() {
-  return <Text>this is expo-routing speaking</Text>;
+  return (
+    <Text className="text-lg font-bold">This is expo-routing, speaking</Text>
+  );
 }
