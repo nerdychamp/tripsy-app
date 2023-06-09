@@ -1,11 +1,11 @@
-import { Link, useLocalSearchParams, useRouter } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import React from 'react';
-import { Text, View, Image, TouchableOpacity, TextInput } from 'react-native';
+import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { ASSETS } from '../../src/common/constant';
 import { AddButton, AppBar, Scaffold } from '../../src/components/base';
+import { theme } from '../../src/theme';
 import { IExpense } from '../../src/types';
 import { useTripActions } from '../../src/zustand/trip-store';
-import { ASSETS } from '../../src/common/constant';
-import { theme } from '../../src/theme';
 
 const CATEGORIES: string[] = [
   'Food',

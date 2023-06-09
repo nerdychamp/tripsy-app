@@ -12,7 +12,7 @@ import { AppBar, Scaffold } from '../src/components/base';
 import { EmptyState } from '../src/components/empty-state';
 import { useTrips } from '../src/zustand/trip-store';
 
-export default function Index() {
+export default function Home() {
   const trips = useTrips();
 
   return (
@@ -28,13 +28,13 @@ export default function Index() {
       <View className="flex-row justify-between items-center my-3 px-4">
         <Text className="font-[700] text-lg text-black">RECENT TRIPS</Text>
         <Link href="add-trip" asChild>
-          <Pressable>
+          <TouchableOpacity>
             <View className="bg-black py-3 px-6 rounded-full">
               <Text className="text-sm font-bold text-brandLight">
                 Add New Trip
               </Text>
             </View>
-          </Pressable>
+          </TouchableOpacity>
         </Link>
       </View>
       <View className="flex-1 overflow-hidden">

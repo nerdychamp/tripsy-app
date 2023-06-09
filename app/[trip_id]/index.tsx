@@ -19,7 +19,7 @@ import {
   useTrips,
 } from '../../src/zustand/trip-store';
 
-export default function TripExpense() {
+export default function Trip() {
   const router = useRouter();
   const { trip_id: tripId } = useLocalSearchParams();
 
