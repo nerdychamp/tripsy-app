@@ -42,7 +42,7 @@ function Bar({
             <Ionicons
               name="chevron-back-outline"
               size={28}
-              color="theme.colors.grey"
+              color={theme.colors.grey}
             />
           </IconButton>
         )}

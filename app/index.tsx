@@ -1,19 +1,18 @@
+import { Link } from 'expo-router';
 import {
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  Pressable,
   FlatList,
+  Image,
+  Pressable,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import { Link, useNavigation } from 'expo-router';
-import { AppBar, Scaffold } from '../src/components/base';
 import { ASSETS } from '../src/common/constant';
-import { useTrips } from '../src/zustand/trip-store';
+import { AppBar, Scaffold } from '../src/components/base';
 import { EmptyState } from '../src/components/empty-state';
+import { useTrips } from '../src/zustand/trip-store';
 
 export default function Index() {
-  const navigation = useNavigation();
   const trips = useTrips();
 
   return (
@@ -52,26 +51,25 @@ export default function Index() {
           }
           renderItem={({ item, index }) => {
             return (
-              <TouchableOpacity
-                key={index}
-                onPress={() => navigation.navigate('trip-expense', { item })}
-              >
-                <View className="bg-white mx-[6] p-2 rounded-2xl">
-                  <Image
-                    source={item.banner}
-                    className="h-[130] w-[150]"
-                    resizeMode="cover"
-                  />
-                  <View style={{ marginLeft: 10, marginTop: 5 }}>
-                    <Text className="text-black font-semibold">
-                      {item.place}
-                    </Text>
-                    <Text className="text-grey text-xs font-semibold">
-                      {item.country}
-                    </Text>
+              <Link href={`${item.id}`} asChild>
+                <TouchableOpacity key={index}>
+                  <View className="bg-white mx-[6] p-2 rounded-2xl">
+                    <Image
+                      source={item.banner}
+                      className="h-[130] w-[150]"
+                      resizeMode="cover"
+                    />
+                    <View style={{ marginLeft: 10, marginTop: 5 }}>
+                      <Text className="text-black font-semibold">
+                        {item.place}
+                      </Text>
+                      <Text className="text-grey text-xs font-semibold">
+                        {item.country}
+                      </Text>
+                    </View>
                   </View>
-                </View>
-              </TouchableOpacity>
+                </TouchableOpacity>
+              </Link>
             );
           }}
         />
