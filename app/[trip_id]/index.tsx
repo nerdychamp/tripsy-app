@@ -1,31 +1,26 @@
+import { Link, useLocalSearchParams, useRouter } from 'expo-router';
+import React from 'react';
 import {
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  FlatList,
   Alert,
+  FlatList,
+  Image,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import {
-  Link,
-  useLocalSearchParams,
-  useNavigation,
-  useRouter,
-} from 'expo-router';
+import { ASSETS } from '../../src/common/constant';
+import { AppBar, Scaffold } from '../../src/components/base';
+import { EmptyState } from '../../src/components/empty-state';
+import { ExpenseCard } from '../../src/components/expense-card';
+import { useDeleteVisibleActions } from '../../src/zustand/delete-visible-store';
 import {
   useGetExpense,
   useTripActions,
   useTrips,
 } from '../../src/zustand/trip-store';
-import { useDeleteVisibleActions } from '../../src/zustand/delete-visible-store';
-import { AppBar, Scaffold } from '../../src/components/base';
-import React from 'react';
-import { EmptyState } from '../../src/components/empty-state';
-import { ASSETS } from '../../src/common/constant';
-import { ExpenseCard } from '../../src/components/expense-card';
 
 export default function TripExpense() {
-  const navigation = useNavigation();
+  const router = useRouter();
   const { trip_id: tripId } = useLocalSearchParams();
 
   const { removeTrip, removeExpense } = useTripActions();
@@ -41,12 +36,12 @@ export default function TripExpense() {
   return (
     <Scaffold className="px-0">
       <AppBar
-        onPress={() => navigation.goBack()}
+        onPress={() => router.back()}
         title={trip.place}
         showDeleteButton={true}
         onDelete={() => {
           removeTrip(trip.id);
-          navigation.goBack();
+          router.back();
         }}
       />
       <View className="justify-center items-center">
